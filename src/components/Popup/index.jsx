@@ -59,6 +59,7 @@ const Popup = () => {
                     fileName: "FileName.pdf",
                     key: "sadsadasd42dwd",
                     fileSize: 1024,
+                    contentType: "application/pdf",
                 }
             );
             setErrorMessage(``);
