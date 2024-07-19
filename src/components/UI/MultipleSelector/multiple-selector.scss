@@ -1,0 +1,43 @@
+.custom-multi-selector {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    &__wrapper{
+        width: 100%;
+    }
+}
+.custom-multi-items {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+    &__item {
+        background: #eeeded;
+        width: fit-content;
+        padding: 2px 8px;
+        border-radius: 30px;
+    }
+}
+.custom-input {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    &:hover {
+        border-color: #8d8d8d !important;
+        transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+    &:focus {
+        border-color: #8d8d8d !important;
+    }
+    &__error-message{
+        color:red
+    }
+    &.error{
+        color:red;
+        &:focus {      border-color: red !important;
+        }
+        &:hover{
+            border-color: red !important;
+        }
+    }
+}
