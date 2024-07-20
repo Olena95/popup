@@ -26,7 +26,11 @@ const CustomMultiSelector = ({ placeholder, onSelect }) => {
         onSelect([...addedNames, { name: name, pmq: "true" }]);
         setName("");
     };
-
+    const deleteName = (addedName) => {
+        const newArray = addedNames.filter((name) => name.name !== addedName);
+        setAddedNames(newArray);
+        onSelect(newArray);
+    };
     return (
         <div className="custom-multi-selector-wrapper">
             <div className="custom-multi-selector">
@@ -66,6 +70,7 @@ const CustomMultiSelector = ({ placeholder, onSelect }) => {
                                 color: "#000000",
                                 fontSize: 12,
                             }}
+                            onClick={() => deleteName(name.name)}
                         />
                     </div>
                 ))}
