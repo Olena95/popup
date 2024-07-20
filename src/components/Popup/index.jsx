@@ -27,17 +27,17 @@ const Popup = () => {
         { value: "neutral", label: "Neutral" },
     ];
     const [documentData, setDocumentData] = useState({
-        document_type: documentType[0].label,
-        witness_type: witnessType[0].label,
+        type: documentType[0].label,
+        witnessType: witnessType[0].label,
     });
     const [isDisabled, setIsDisabled] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
     const isReqFieldsFill = (obj) => {
         return (
-            "document_type" in obj &&
-            "witness_type" in obj &&
-            "document_name" in obj &&
-            "witness_names" in obj
+            "type" in obj &&
+            "witnessType" in obj &&
+            "name" in obj &&
+            "witnesses" in obj
         );
     };
     const handleData = (field, text) => {
@@ -51,16 +51,17 @@ const Popup = () => {
     };
 
     const handleSubmit = async () => {
+        const requestBody = {
+            ...documentData,
+            fileName: "FileName.pdf",
+            key: "sadsadasd42dwd",
+            fileSize: 1024,
+            contentType: "application/pdf",
+        };
         try {
             const response = await axios.post(
                 "https://example.com/api/documents",
-                {
-                    ...documentData,
-                    fileName: "FileName.pdf",
-                    key: "sadsadasd42dwd",
-                    fileSize: 1024,
-                    contentType: "application/pdf",
-                }
+                requestBody
             );
             setErrorMessage(``);
             console.log("Response:", response.data);
@@ -113,10 +114,10 @@ const Popup = () => {
                     />
                 }
             >
-                <div className="modal">
-                    <div className="modal__sub-title">Duong v. ITT</div>
-                    <div className="modal__file-block">
-                        <div className="modal__file">
+                <div className="popup">
+                    <div className="popup__sub-title">Duong v. ITT</div>
+                    <div className="popup__file-block">
+                        <div className="popup__file">
                             <div>
                                 <FileDoneOutlined
                                     style={{
@@ -125,10 +126,10 @@ const Popup = () => {
                                 />
                             </div>
                             <div>
-                                <div className="modal__file_name">
+                                <div className="popup__file_name">
                                     File Name
                                 </div>
-                                <div className="modal__file_size">9 MB</div>
+                                <div className="popup__file_size">9 MB</div>
                             </div>
                         </div>
                         <div>
@@ -147,9 +148,7 @@ const Popup = () => {
                         <Input
                             placeholder="Document Name"
                             className="custom-input"
-                            onChange={(e) =>
-                                handleData("document_name", e.target.value)
-                            }
+                            onChange={(e) => handleData("name", e.target.value)}
                         />
                     </div>
                     <div>
@@ -159,7 +158,7 @@ const Popup = () => {
                         <CustomSelector
                             options={documentType}
                             onSelect={(option) =>
-                                handleData("document_type", option.value)
+                                handleData("type", option.value)
                             }
                         />
                     </div>
@@ -170,7 +169,7 @@ const Popup = () => {
                         <CustomMultiSelector
                             placeholder="Witness Name"
                             onSelect={(options) =>
-                                handleData("witness_names", options)
+                                handleData("witnesses", options)
                             }
                         />
                     </div>
@@ -181,13 +180,13 @@ const Popup = () => {
                         <CustomSelector
                             options={witnessType}
                             onSelect={(option) =>
-                                handleData("witness_type", option.value)
+                                handleData("witnessType", option.value)
                             }
                         />
                     </div>
                 </div>
                 {errorMessage && (
-                    <div className="modal__error-message">{errorMessage}</div>
+                    <div className="popup__error-message">{errorMessage}</div>
                 )}
             </Modal>
         </>

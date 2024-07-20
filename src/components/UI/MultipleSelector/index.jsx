@@ -56,7 +56,10 @@ const CustomMultiSelector = ({ placeholder, onSelect }) => {
             )}
             <div className="custom-multi-items">
                 {addedNames.map((name, i) => (
-                    <div className="custom-multi-items__item" key={i}>
+                    <div
+                        className="custom-multi-items__item"
+                        key={i + Math.random()}
+                    >
                         {name.name}{" "}
                         <CloseOutlined
                             style={{
